@@ -1,0 +1,5 @@
+# Ignore only node_modules in frontend
+node_modules/
+node_modules
+.env
+.env.local
