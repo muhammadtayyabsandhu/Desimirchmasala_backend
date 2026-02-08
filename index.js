@@ -30,7 +30,13 @@ const PORT = process.env.PORT || 5173;
 
 //Middleware
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+// ✅ Updated CORS to allow live frontend domain
+app.use(cors({
+  origin: "https://desimirchmasala.com", // aapke live frontend ka domain
+  credentials: true
+}));
+
 app.use(cookieParser());
 
 //Routes
