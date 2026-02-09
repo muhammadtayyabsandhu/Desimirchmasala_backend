@@ -62,10 +62,13 @@ const login = async (req, res) => {
 //User Logout
 const logout = async (_, res) => {
   try {
-    return res.status(200).cookie("token", "", { maxAge: 0 }).json({
-      success: true,
-      message: "User logged out successfully",
-    });
+    return res
+      .status(200)
+      .cookie("token", "", { maxAge: 0, sameSite: "None", secure: true })
+      .json({
+        success: true,
+        message: "User logged out successfully",
+      });
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -316,7 +319,7 @@ const updatePassword = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     user.password = hashedPassword;
-    user.otp = {}; 
+    user.otp = {};
     await user.save();
     res.status(200).json({
       success: true,

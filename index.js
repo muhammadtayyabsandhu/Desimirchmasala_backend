@@ -32,10 +32,12 @@ const PORT = process.env.PORT || 5173;
 app.use(express.json());
 
 // ✅ Updated CORS to allow live frontend domain
-app.use(cors({
-  origin: "https://desimirchmasala.com", // aapke live frontend ka domain
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://desimirchmasala.com"],
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
 

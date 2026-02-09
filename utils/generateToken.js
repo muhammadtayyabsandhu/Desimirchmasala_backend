@@ -12,7 +12,7 @@ const generateToken = (res, user, message) => {
     .status(200)
     .cookie("token", token, {
       httpOnly: true,
-      sameSite: "strict",
+      sameSite: "None",
       secure: true,
       maxAge: 5 * 24 * 60 * 60 * 1000,
     })
