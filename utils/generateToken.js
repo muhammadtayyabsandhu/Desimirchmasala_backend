@@ -12,9 +12,9 @@ const generateToken = (res, user, message) => {
     .status(200)
     .cookie("token", token, {
       httpOnly: true,
-      sameSite: "None",
-      secure: true,
-      maxAge: 5 * 24 * 60 * 60 * 1000,
+      sameSite: "None", // Required for cross-origin (Frontend: Vercel, Backend: Railway)
+      secure: true, // Required for SameSite=None
+      maxAge: 5 * 24 * 60 * 60 * 1000, // 5 days
     })
     .json({
       success: true,

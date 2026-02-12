@@ -12,6 +12,9 @@ const orderRouter = require("./routes/orderRoute.js");
 
 const app = express();
 
+// ✅ Trust Proxy for Railway/Heroku (Required for Secure Cookies)
+app.set("trust proxy", 1);
+
 //Database
 connectDB();
 
@@ -34,8 +37,10 @@ app.use(express.json());
 // ✅ Updated CORS to allow live frontend domain
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://desimirchmasala.com"],
+    origin: ["http://localhost:5173", "https://desimirchmasala.com", "https://www.desimirchmasala.com"],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
