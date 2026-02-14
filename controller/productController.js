@@ -6,6 +6,7 @@ const createProduct = async (req, res) => {
   try {
     let {
       title,
+      titleEnglish,
       brand_name,
       tags,
       category,
@@ -21,6 +22,7 @@ const createProduct = async (req, res) => {
     const image = cloudResponse.secure_url;
     const product = await Product.create({
       title,
+      titleEnglish,
       brand_name,
       tags,
       category,
