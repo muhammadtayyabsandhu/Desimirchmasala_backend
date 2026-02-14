@@ -3,7 +3,7 @@ const Order = require("../models/orderModel.js");
 // Place a new order
 const placeOrder = async (req, res) => {
   try {
-    const { address, city, state, zip, mobile, products, totalAmount } = req.body;
+    const { address, city, state, zip, mobile, products, totalAmount, paymentMethod } = req.body;
     const userId = req.user._id;
 
     // Generate a unique order ID
@@ -19,6 +19,7 @@ const placeOrder = async (req, res) => {
       mobile,
       products,
       totalAmount,
+      paymentMethod: paymentMethod || "COD",
       Date: new Date().toLocaleDateString(),
     });
 

@@ -21,9 +21,14 @@ const orderModel = new mongoose.Schema(
     ],
     totalAmount: { type: Number, required: true },
     Date: { type: String, },
+    paymentMethod: {
+      type: String,
+      enum: ["COD", "Online Payment"],
+      default: "COD",
+    },
     status: {
       type: String,
-      enum: ["pending", "shipped", "delivered"],
+      enum: ["pending", "processing", "on the way", "delivered"],
       default: "pending",
     },
   },
