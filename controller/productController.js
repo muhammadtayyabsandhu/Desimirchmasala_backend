@@ -89,4 +89,36 @@ const deleteProduct = async (req, res) => {
     });
   }
 };
-module.exports = { createProduct, getProducts, deleteProduct };
+
+const updateProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, new_price } = req.body;
+
+    const product = await Product.findById(id);
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+    if (title) product.title = title;
+    if (new_price) product.new_price = new_price;
+
+    await product.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Product updated successfully",
+      product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: `Error ${error} while updating product`,
+    });
+  }
+};
+
+module.exports = { createProduct, getProducts, deleteProduct, updateProduct };

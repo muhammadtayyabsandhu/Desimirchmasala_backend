@@ -3,6 +3,7 @@ const {
   createProduct,
   getProducts,
   deleteProduct,
+  updateProduct,
 } = require("../controller/productController.js");
 const {
   isAdmin,
@@ -13,9 +14,11 @@ const { upload } = require("../utils/cloudinary.js");
 const router = express.Router();
 
 router
-.route("/create")
-.post(isAdmin, isAuthenticated, upload.single("image"), createProduct);
+  .route("/create")
+  .post(isAdmin, isAuthenticated, upload.single("image"), createProduct);
 router.route("/").get(getProducts);
-router.route("/:id").delete(isAuthenticated ,isAdmin,  deleteProduct);
+router.route("/:id")
+  .delete(isAuthenticated, isAdmin, deleteProduct)
+  .put(isAuthenticated, isAdmin, updateProduct);
 
 module.exports = router;
