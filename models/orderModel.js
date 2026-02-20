@@ -5,11 +5,17 @@ const orderModel = new mongoose.Schema(
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     orderId: { type: String, unique: true },
     paymentId: { type: String },
-    address: { type: String, required: true },
+
+    // Shipping Information
+    fullName: { type: String, required: true },
+    phone: { type: String, required: true },
+    province: { type: String, required: true },
     city: { type: String, required: true },
-    state: { type: String, required: true },
-    zip: { type: Number, required: true },
-    mobile: { type: Number, required: true },
+    area: { type: String, required: true },
+    colony: { type: String, required: true },
+    buildingNo: { type: String, required: true },
+
+
     products: [
       {
         productId: { type: String, required: true },
@@ -20,7 +26,7 @@ const orderModel = new mongoose.Schema(
       },
     ],
     totalAmount: { type: Number, required: true },
-    Date: { type: String, },
+    Date: { type: String },
     paymentMethod: {
       type: String,
       enum: ["COD", "Online Payment"],

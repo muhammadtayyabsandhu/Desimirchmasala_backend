@@ -1,9 +1,22 @@
 const Order = require("../models/orderModel.js");
+const sendOrderNotification = require("../utils/sendOrderNotification.js");
 
 // Place a new order
 const placeOrder = async (req, res) => {
   try {
-    const { address, city, state, zip, mobile, products, totalAmount, paymentMethod } = req.body;
+    const {
+      fullName,
+      phone,
+      province,
+      city,
+      area,
+      colony,
+      buildingNo,
+      products,
+      totalAmount,
+      paymentMethod,
+    } = req.body;
+
     const userId = req.user._id;
 
     // Generate a unique order ID
@@ -12,16 +25,26 @@ const placeOrder = async (req, res) => {
     const order = await Order.create({
       userId,
       orderId,
-      address,
+      fullName,
+      phone,
+      province,
       city,
-      state,
-      zip,
-      mobile,
+      area,
+      colony,
+      buildingNo,
       products,
       totalAmount,
       paymentMethod: paymentMethod || "COD",
       Date: new Date().toLocaleDateString(),
     });
+
+    console.log("➡️ Order saved inside DB:", order.orderId);
+
+    // Send admin email notification (non-blocking — errors won't fail the order)
+    console.log("➡️ Triggering sendOrderNotification...");
+    sendOrderNotification(order).catch((err) =>
+      console.error("❌ Email notification error (in controller):", err)
+    );
 
     res.status(201).json({
       success: true,
