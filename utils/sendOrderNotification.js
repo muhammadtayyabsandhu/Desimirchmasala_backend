@@ -59,7 +59,7 @@ const sendOrderNotification = async (order) => {
           <tr>
             <td style="background:#9B0000;padding:24px 32px;text-align:center;">
               <h1 style="color:#ffffff;margin:0;font-size:22px;">🛒 New Order Received!</h1>
-              <p style="color:#ffcccc;margin:6px 0 0;font-size:13px;">DeliMirch Masala Admin Panel</p>
+              <p style="color:#ffcccc;margin:6px 0 0;font-size:13px;">DesiMirch Masala Admin Panel</p>
             </td>
           </tr>
           <!-- Order Info -->
@@ -115,7 +115,7 @@ const sendOrderNotification = async (order) => {
           <!-- Footer -->
           <tr>
             <td style="background:#f4f4f4;padding:16px 32px;text-align:center;font-size:12px;color:#999;">
-              This is an automated notification from DeliMirch Masala. Please log in to the admin panel to manage this order.
+              This is an automated notification from DesiMirch Masala. Please log in to the admin panel to manage this order.
             </td>
           </tr>
         </table>
@@ -126,7 +126,7 @@ const sendOrderNotification = async (order) => {
 </html>`;
 
     const mailOptions = {
-      from: `"DeliMirch Masala Orders" <${process.env.EMAIL}>`,
+      from: `"DesiMirch Masala Orders" <${process.env.EMAIL}>`,
       to: process.env.ADMIN_EMAIL,
       subject: `🛒 New Order Received — ${order.orderId}`,
       html,
