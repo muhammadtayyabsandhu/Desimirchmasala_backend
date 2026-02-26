@@ -26,7 +26,6 @@ const orderModel = new mongoose.Schema(
       },
     ],
     totalAmount: { type: Number, required: true },
-    Date: { type: String },
     paymentMethod: {
       type: String,
       enum: ["COD", "Online Payment"],

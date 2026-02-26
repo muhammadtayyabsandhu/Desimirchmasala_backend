@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema(
     },
     titleEnglish: {
       type: String,
-      required: true,
+      default: "",
     },
     brand_name: {
       type: String,

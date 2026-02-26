@@ -35,7 +35,7 @@ const placeOrder = async (req, res) => {
       products,
       totalAmount,
       paymentMethod: paymentMethod || "COD",
-      Date: new Date().toLocaleDateString(),
+      // No custom Date field, use createdAt
     });
 
     console.log("➡️ Order saved inside DB:", order.orderId);

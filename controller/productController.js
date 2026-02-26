@@ -93,7 +93,7 @@ const deleteProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, new_price } = req.body;
+    const { title, titleEnglish, new_price } = req.body;
 
     const product = await Product.findById(id);
     if (!product) {
@@ -103,8 +103,18 @@ const updateProduct = async (req, res) => {
       });
     }
 
-    if (title) product.title = title;
-    if (new_price) product.new_price = new_price;
+    // Always set titleEnglish, fallback to existing value if not provided
+    product.title = title || product.title;
+    product.titleEnglish = (typeof titleEnglish !== 'undefined' ? titleEnglish : product.titleEnglish);
+    product.new_price = (typeof new_price !== 'undefined' ? new_price : product.new_price);
+
+    // If titleEnglish is missing after fallback, throw error
+    // if (!product.titleEnglish) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "titleEnglish is required.",
+    //   });
+    // }
 
     await product.save();
 
