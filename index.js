@@ -15,14 +15,17 @@ const app = express();
 // ✅ Trust Proxy for Railway/Heroku (Required for Secure Cookies)
 app.set("trust proxy", 1);
 
-//Database
-connectDB();
-
 // ✅ Check loaded vars
 if (!process.env.MONGO_URI) {
   console.error("❌ MONGO_URI is missing in .env file");
   process.exit(1);
 }
+
+// Ensure DB is connected before handling ANY route (CRITICAL for Serverless)
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 
 
 //Middleware
