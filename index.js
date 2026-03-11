@@ -41,6 +41,10 @@ app.use(
 app.use(cookieParser());
 
 //Routes
+app.get("/", (req, res) => {
+  res.send("Welcome to DeliMirch Masla API!");
+});
+
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/order", orderRouter);
