@@ -23,13 +23,7 @@ if (!process.env.MONGO_URI) {
   console.error("❌ MONGO_URI is missing in .env file");
   process.exit(1);
 }
-if (!process.env.PORT) {
-  console.error("❌ PORT is missing in .env file");
-  process.exit(1);
-}
 
-//PORT
-const PORT = process.env.PORT || 5173;
 
 //Middleware
 app.use(express.json());
@@ -51,9 +45,5 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/order", orderRouter);
 
-//Start server
-app.listen(PORT, () => {
-  console.log(`✅ Example app listening on port ${PORT}`);
-});
-
-// Triggering nodemon restart
+// Export for Vercel serverless
+module.exports = app;
